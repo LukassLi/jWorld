@@ -22,6 +22,10 @@ namespace GameServer
         {
             DBService.Instance.Init();
             thread = new Thread(new ThreadStart(this.Update));
+
+            SkillBridge.Message.UserRegisterRequest ur = new SkillBridge.Message.UserRegisterRequest();
+            ur.Age = 5;
+
             return true;
         }
 
