@@ -18,9 +18,19 @@ namespace GameServer
     {
         Thread thread;
         bool running = false;
+        NetService network;
         public bool Init()
         {
-            DBService.Instance.Init();
+            int port = 8000;
+            network = new NetService();
+            network.Init(port);
+
+            HelloworldService.Instance.Init();
+
+
+            //DBService.Instance.Init();
+            // db是否成功可以在这里打印一个数据字段看看
+
             thread = new Thread(new ThreadStart(this.Update));
 
             SkillBridge.Message.UserRegisterRequest ur = new SkillBridge.Message.UserRegisterRequest();
@@ -31,6 +41,8 @@ namespace GameServer
 
         public void Start()
         {
+            network.Start();
+            HelloworldService.Instance.Start();
             running = true;
             thread.Start();
         }
@@ -38,6 +50,7 @@ namespace GameServer
 
         public void Stop()
         {
+            network.Stop();
             running = false;
             thread.Join();
         }

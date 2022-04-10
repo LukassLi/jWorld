@@ -373,7 +373,7 @@ namespace Network
                     this.CloseConnection(NET_ERROR_SEND_EXCEPTION);
                     return false;
                 }
-                ret = this.clientSocket.Poll(0, SelectMode.SelectWrite);
+                ret = this.clientSocket.Poll(0, SelectMode.SelectWrite); // 可以速度很快地返回结果，类似linux的网络
                 if (ret)
                 {
                     //sendStream exist data

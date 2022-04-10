@@ -137,7 +137,7 @@ namespace Network
             }
 
             //未接收完/要结束了
-            if (this.readOffset > 0)
+            if (this.readOffset > 0) // 包括粘包处理
             {
                 long size = stream.Position - this.readOffset;
                 if (this.readOffset < stream.Position)
