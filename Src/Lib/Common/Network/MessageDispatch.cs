@@ -5,7 +5,7 @@ namespace Network
 {
     public class MessageDispatch<T> : Singleton<MessageDispatch<T>>
     {
-        public void Dispatch(T sender, SkillBridge.Message.NetMessageResponse message) // 还有另一种分发处理是反射
+        public void Dispatch(T sender, SkillBridge.Message.NetMessageResponse message)
         {
             if (message.userRegister != null) { MessageDistributer<T>.Instance.RaiseEvent(sender, message.userRegister); }
             if (message.userLogin != null) { MessageDistributer<T>.Instance.RaiseEvent(sender, message.userLogin); }
