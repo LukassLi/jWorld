@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Common;
+using GameServer.Entities;
+using GameServer.Managers;
 using Network;
 using SkillBridge.Message;
 
@@ -15,6 +17,7 @@ namespace GameServer.Services
         {
             MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserLoginRequest>(this.OnLogin); // todo 接收到的消息中，带有一个sender对象，用于发送响应，为什么这样设计？而不用单例等
             MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserRegisterRequest>(this.onRegister);
+            MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserGameEnterRequest>(this.OnGameEnter);
         }
 
         private void onRegister(NetConnection<NetSession> sender, UserRegisterRequest request)
@@ -95,7 +98,29 @@ namespace GameServer.Services
                 byte[] data = PackageHandler.PackMessage(message);
                 sender.SendData(data,0,data.Length);
             }
-            
+
+        }
+
+
+        // 角色管理器中添加角色实体
+        // 成功后，发送一个成功响应给客户端
+        // 地图管理器进入角色实体
+        private void OnGameEnter(NetConnection<NetSession> sender, UserGameEnterRequest request)
+        {
+            TCharacter dbchar = sender.Session.User.Player.Characters.ElementAt(request.characterIdx);
+            Log.InfoFormat("UserGameEnterRequest: characterID:{0}:{1} Map:{2}", dbchar.ID, dbchar.Name, dbchar.MapID);
+            Character character = CharacterManager.Instance.AddCharacter(dbchar);
+
+            NetMessage message = new NetMessage();
+            message.Response = new NetMessageResponse();
+            message.Response.gameEnter = new UserGameEnterResponse();
+            message.Response.gameEnter.Errormsg = "None";
+            message.Response.gameEnter.Result = Result.Success;
+            byte[] data = PackageHandler.PackMessage(message);
+            sender.SendData(data,0,data.Length);
+            sender.Session.Character = character;
+
+            MapManager.Instance[dbchar.MapID].CharacterEnter(sender, character);
         }
     }
 }
