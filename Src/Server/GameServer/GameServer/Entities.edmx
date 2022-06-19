@@ -4,53 +4,53 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="ExtremeWorldModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl" Alias="Self" Namespace="ExtremeWorldModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012">
   <EntityContainer Name="ExtremeWorldModelStoreContainer">
-    <EntitySet Name="Users" EntityType="ExtremeWorldModel.Store.Users" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Players" EntityType="ExtremeWorldModel.Store.Players" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Characters" EntityType="ExtremeWorldModel.Store.Characters" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Users" EntityType="ExtremeWorldModel.Store.Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Players" EntityType="ExtremeWorldModel.Store.Players" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Characters" EntityType="ExtremeWorldModel.Store.Characters" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="UserPlayer" Association="ExtremeWorldModel.Store.UserPlayer">
-      <End Role="User" EntitySet="Users" />
-      <End Role="Player" EntitySet="Players" />
+      <End EntitySet="Users" Role="User" />
+      <End EntitySet="Players" Role="Player" />
     </AssociationSet>
     <AssociationSet Name="PlayerCharacter" Association="ExtremeWorldModel.Store.PlayerCharacter">
-      <End Role="Player" EntitySet="Players" />
-      <End Role="Character" EntitySet="Characters" />
+      <End EntitySet="Players" Role="Player" />
+      <End EntitySet="Characters" Role="Character" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="Users">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Username" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
-    <Property Name="RegisterDate" Type="datetime" Nullable="true" />
-    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="ID" Nullable="false" StoreGeneratedPattern="Identity" Type="bigint" />
+    <Property Name="Username" Nullable="false" MaxLength="50" Type="nvarchar" />
+    <Property Name="Password" Nullable="false" MaxLength="50" Type="nvarchar" />
+    <Property Name="RegisterDate" Nullable="true" Type="datetime" />
+    <Property Name="Player_ID" Nullable="false" Type="int" />
   </EntityType>
   <EntityType Name="Players">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
   </EntityType>
   <EntityType Name="Characters">
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="TID" Type="int" Nullable="false" />
-    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
-    <Property Name="Class" Type="int" Nullable="false" />
-    <Property Name="MapID" Type="int" Nullable="false" DefaultValue="1" />
-    <Property Name="MapPosX" Type="int" Nullable="false" />
-    <Property Name="MapPosY" Type="int" Nullable="false" />
-    <Property Name="MapPosZ" Type="int" Nullable="false" />
-    <Property Name="Player_ID" Type="int" Nullable="false" />
+    <Property Name="ID" Nullable="false" StoreGeneratedPattern="Identity" Type="int" />
+    <Property Name="TID" Nullable="false" Type="int" />
+    <Property Name="Name" Nullable="false" Type="nvarchar(max)" />
+    <Property Name="Class" Nullable="false" Type="int" />
+    <Property Name="MapID" Nullable="false" DefaultValue="1" Type="int" />
+    <Property Name="MapPosX" Nullable="false" Type="int" />
+    <Property Name="MapPosY" Nullable="false" Type="int" />
+    <Property Name="MapPosZ" Nullable="false" Type="int" />
+    <Property Name="Player_ID" Nullable="false" Type="int" />
   </EntityType>
   <Association Name="UserPlayer">
-    <End Role="User" Type="ExtremeWorldModel.Store.Users" Multiplicity="*" />
-    <End Role="Player" Type="ExtremeWorldModel.Store.Players" Multiplicity="1" />
+    <End Type="ExtremeWorldModel.Store.Users" Multiplicity="*" Role="User" />
+    <End Type="ExtremeWorldModel.Store.Players" Multiplicity="1" Role="Player" />
     <ReferentialConstraint>
       <Principal Role="Player">
         <PropertyRef Name="ID" />
@@ -61,8 +61,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="PlayerCharacter">
-    <End Role="Player" Type="ExtremeWorldModel.Store.Players" Multiplicity="1" />
-    <End Role="Character" Type="ExtremeWorldModel.Store.Characters" Multiplicity="*" />
+    <End Type="ExtremeWorldModel.Store.Players" Multiplicity="1" Role="Player" />
+    <End Type="ExtremeWorldModel.Store.Characters" Multiplicity="*" Role="Character" />
     <ReferentialConstraint>
       <Principal Role="Player">
         <PropertyRef Name="ID" />
@@ -133,7 +133,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
     <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="ExtremeWorldModelStoreContainer" CdmEntityContainer="ExtremeWorldEntities">
+  <EntityContainerMapping CdmEntityContainer="ExtremeWorldEntities" StorageEntityContainer="ExtremeWorldModelStoreContainer">
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="IsTypeOf(ExtremeWorldModel.TUser)">
         <MappingFragment StoreEntitySet="Users">

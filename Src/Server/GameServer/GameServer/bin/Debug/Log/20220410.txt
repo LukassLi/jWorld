@@ -1,0 +1,61 @@
+
+2022-04-10 11:44:17,048 [1] [INFO ] [GameServer] £ºGame Server Init
+2022-04-10 11:44:17,385 [1] [WARN ] [GameServer] £ºStarting Listener...
+2022-04-10 11:44:17,453 [9] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:17,453 [8] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:17,453 [6] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:17,454 [10] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:17,453 [5] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:17,454 [13] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:17,453 [7] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:17,455 [14] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:17,567 [1] [WARN ] [GameServer] £ºNetService Started
+2022-04-10 11:44:58,982 [1] [INFO ] [GameServer] £ºGame Server Init
+2022-04-10 11:44:59,099 [1] [WARN ] [GameServer] £ºStarting Listener...
+2022-04-10 11:44:59,186 [6] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:59,186 [11] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:59,186 [5] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:59,186 [10] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:59,186 [9] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:59,186 [7] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:59,186 [8] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:59,186 [16] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:44:59,276 [1] [WARN ] [GameServer] £ºNetService Started
+2022-04-10 11:45:48,023 [1] [INFO ] [GameServer] £ºGame Server Init
+2022-04-10 11:45:48,111 [1] [WARN ] [GameServer] £ºStarting Listener...
+2022-04-10 11:45:48,161 [6] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:45:48,161 [12] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:45:48,161 [8] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:45:48,161 [11] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:45:48,161 [9] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:45:48,161 [7] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:45:48,161 [16] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:45:48,206 [5] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 11:45:48,261 [1] [WARN ] [GameServer] £ºNetService Started
+2022-04-10 16:30:23,282 [1] [INFO ] [GameServer] £ºGame Server Init
+2022-04-10 16:30:23,422 [1] [WARN ] [GameServer] £ºStarting Listener...
+2022-04-10 16:30:23,512 [5] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 16:30:23,512 [7] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 16:30:23,512 [11] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 16:30:23,512 [9] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 16:30:23,512 [6] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 16:30:23,512 [10] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 16:30:23,512 [13] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 16:30:23,512 [15] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 16:30:23,543 [1] [WARN ] [GameServer] £ºNetService Started
+2022-04-10 16:30:33,356 [3] [WARN ] [GameServer] £ºClient[127.0.0.1:63594]] Connected
+2022-04-10 16:31:02,395 [3] [WARN ] [GameServer] £ºClient[] Disconnected
+2022-04-10 17:45:17,672 [1] [INFO ] [GameServer] £ºGame Server Init
+2022-04-10 17:45:17,992 [1] [WARN ] [GameServer] £ºStarting Listener...
+2022-04-10 17:45:18,092 [5] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 17:45:18,092 [10] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 17:45:18,092 [7] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 17:45:18,092 [8] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 17:45:18,092 [11] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 17:45:18,092 [6] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 17:45:18,092 [12] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 17:45:18,092 [9] [WARN ] [GameServer] £ºMessageDistribute thread start
+2022-04-10 17:45:18,172 [1] [WARN ] [GameServer] £ºNetService Started
+2022-04-10 17:45:35,905 [3] [WARN ] [GameServer] £ºClient[127.0.0.1:54240]] Connected
+2022-04-10 17:45:36,091 [3] [WARN ] [GameServer] £ºClient[] DataReceived Len:24
+2022-04-10 17:45:36,380 [5] [INFO ] [GameServer] £ºOnFirstTestRequest: Helloworld:fuck you world
