@@ -1,0 +1,9 @@
+E:\jWorld\Src\Lib\Protocol\bin\Debug\Protocol.dll
+E:\jWorld\Src\Lib\Protocol\bin\Debug\Protocol.pdb
+E:\jWorld\Src\Lib\Protocol\bin\Debug\protobuf-net.dll
+E:\jWorld\Src\Lib\Protocol\bin\Debug\protobuf-net.xml
+E:\jWorld\Src\Lib\Protocol\obj\Debug\Protocol.csproj.AssemblyReference.cache
+E:\jWorld\Src\Lib\Protocol\obj\Debug\Protocol.csproj.CoreCompileInputs.cache
+E:\jWorld\Src\Lib\Protocol\obj\Debug\Protocol.csproj.CopyComplete
+E:\jWorld\Src\Lib\Protocol\obj\Debug\Protocol.dll
+E:\jWorld\Src\Lib\Protocol\obj\Debug\Protocol.pdb
