@@ -16,7 +16,7 @@ public class UICharacterSelect : MonoBehaviour
     public GameObject penalCreate;
     public GameObject penalSelect;
 
-    public List<GameObject> uiChars = new List<GameObject>();
+    private List<GameObject> uiChars = new List<GameObject>();
 
     public Transform uiCharList; // todo 为啥是transform类型？指的是父节点吗
     public GameObject uiCharInfo;
