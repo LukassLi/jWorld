@@ -18,6 +18,12 @@ namespace GameServer.Services
             MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserLoginRequest>(this.OnLogin); // todo 接收到的消息中，带有一个sender对象，用于发送响应，为什么这样设计？而不用单例等
             MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserRegisterRequest>(this.onRegister);
             MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserGameEnterRequest>(this.OnGameEnter);
+            MessageDistributer<NetConnection<NetSession>>.Instance.Subscribe<UserCreateCharacterRequest>(this.OnCreateCharacter);
+        }
+
+        public void Init()
+        {
+            // todo
         }
 
         private void onRegister(NetConnection<NetSession> sender, UserRegisterRequest request)
@@ -101,6 +107,32 @@ namespace GameServer.Services
 
         }
 
+        private void OnCreateCharacter(NetConnection<NetSession> sender, UserCreateCharacterRequest request)
+        {
+            // 构建一个TCharacter，存入数据库里，同时更新会话中的用户数据，并发送一个成功响应给客户端（一般视为成功）
+            TCharacter character = new TCharacter()
+            {
+                Name = request.Name,
+                Class = (int)request.Class,
+                TID = (int)request.Class,
+                MapID = 1, // todo 第一次是主城
+                MapPosX = 5000,
+                MapPosY = 4000,
+                MapPosZ = 820,
+            };
+
+            DBService.Instance.Entities.Characters.Add(character);
+            DBService.Instance.Entities.SaveChanges();
+            sender.Session.User.Player.Characters.Add(character);
+
+            NetMessage message = new NetMessage();
+            message.Response = new NetMessageResponse();
+            message.Response.createChar = new UserCreateCharacterResponse();
+            message.Response.createChar.Errormsg = "None";
+            message.Response.createChar.Result = Result.Success;
+            byte[] data = PackageHandler.PackMessage(message);
+            sender.SendData(data, 0, data.Length);
+        }
 
         // 角色管理器中添加角色实体
         // 成功后，发送一个成功响应给客户端

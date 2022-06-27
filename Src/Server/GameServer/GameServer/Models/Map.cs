@@ -57,7 +57,6 @@ namespace GameServer.Models
             
             character.Info.mapId = ID;
 
-           
             NetMessage message = new NetMessage();
             message.Response = new NetMessageResponse();
             message.Response.mapCharacterEnter = new MapCharacterEnterResponse();
@@ -65,8 +64,8 @@ namespace GameServer.Models
             message.Response.mapCharacterEnter.Characters.Add(character.Info);
             foreach (var kv in MapCharacters)
             {
-                message.Response.mapCharacterEnter.Characters.Add(kv.Value.character.Info);
-                SendCharacterEnterMap(kv.Value.connection,character.Info);
+                message.Response.mapCharacterEnter.Characters.Add(kv.Value.character.Info); // 让进入的角色知道地图上其它角色
+                SendCharacterEnterMap(kv.Value.connection,character.Info); // 让地图上其它的角色知道进入的角色
             }
 
             this.MapCharacters.Add(character.Id, new MapCharacter(conn, character));

@@ -41,6 +41,7 @@ namespace Services
             MessageDistributer.Instance.Subscribe<UserLoginResponse>(OnUserLogin); // todo 这个为什么不用像服务端一样指定一个发送者
             MessageDistributer.Instance.Subscribe<UserRegisterResponse>(OnUserRegister);
             MessageDistributer.Instance.Subscribe<UserCreateCharacterResponse>(OnUserCreateCharacter);
+            MessageDistributer.Instance.Subscribe<UserGameEnterResponse>(OnGameEnter);
             NetClient.Instance.OnConnect += OnGameServerConnect;
             NetClient.Instance.OnDisconnect += OnGameServerDisconnect;
         }
@@ -52,6 +53,7 @@ namespace Services
             MessageDistributer.Instance.Unsubscribe<UserLoginResponse>(OnUserLogin);
             MessageDistributer.Instance.Unsubscribe<UserRegisterResponse>(OnUserRegister);
             MessageDistributer.Instance.Unsubscribe<UserCreateCharacterResponse>(OnUserCreateCharacter);
+            MessageDistributer.Instance.Unsubscribe<UserGameEnterResponse>(OnGameEnter);
             NetClient.Instance.OnConnect -= OnGameServerConnect;
             NetClient.Instance.OnDisconnect -= OnGameServerDisconnect;
 
@@ -63,6 +65,57 @@ namespace Services
             Debug.Log("ConnectToServer() Start "); // todo这个会调用log4net吗？
             NetClient.Instance.Init("127.0.0.1", 8000);
             NetClient.Instance.Connect();
+        }
+
+
+        private void OnGameServerConnect(int result, string reason)
+        {
+            // 判断网络连接是否连接上了
+            // 如果连接上，则判断是否有消息在排队，如果有，发送并清空
+            // 如果没有连上，判断是否需要进行断连通知，如果不需要，则用消息盒子提示网络错误消息
+            if (NetClient.Instance.Connected)
+            {
+                this.connected = true;
+                if (pendingMessage != null)
+                {
+                    NetClient.Instance.SendMessage(pendingMessage);
+                    pendingMessage = null;
+                }
+            }
+            else
+            {
+                if (!this.DisconnectNotify(result, reason))
+                {
+                    MessageBox.Show(string.Format("网络错误，无法连接到服务器！\n RESULT:{0} ERROR:{1}", result, reason), "错误", MessageBoxType.Error);
+                }
+            }
+
+        }
+
+        private void OnGameServerDisconnect(int result, string reason)
+        {
+            // 进行断连通知
+            DisconnectNotify(result, reason);
+        }
+
+        private bool DisconnectNotify(int result, string reason)
+        {
+            // 判断是否有消息在排队
+            // 如果有，判断是否有登录请求的消息
+            // 如果有，判断是否有登录监听
+            // 如果有，则发送一个失败的消息
+            if (pendingMessage != null)
+            {
+                if (pendingMessage.Request.userLogin != null)
+                {
+                    if (OnLogin != null)
+                    {
+                        OnLogin(Result.Failed, string.Format("服务器断开！\n RESULT:{0} ERROR:{1}", result, reason));
+                    }
+                }
+                return true;
+            }
+            return false;
         }
 
         // 判断当前是否已经有网络连接
@@ -183,55 +236,25 @@ namespace Services
 
         }
 
-
-        private void OnGameServerConnect(int result, string reason)
+        public void SendGameEnter(int characterIdx)
         {
-            // 判断网络连接是否连接上了
-            // 如果连接上，则判断是否有消息在排队，如果有，发送并清空
-            // 如果没有连上，判断是否需要进行断连通知，如果不需要，则用消息盒子提示网络错误消息
-            if (NetClient.Instance.Connected)
-            {
-                this.connected = true;
-                if (pendingMessage != null)
-                {
-                    NetClient.Instance.SendMessage(pendingMessage);
-                    pendingMessage = null;
-                }
-            }
-            else
-            {
-                if (!this.DisconnectNotify(result,reason))
-                {
-                    MessageBox.Show(string.Format("网络错误，无法连接到服务器！\n RESULT:{0} ERROR:{1}", result, reason),"错误",MessageBoxType.Error);
-                }
-            }
-
+            Debug.LogFormat("SendGameEnter::characterIdx :{0}", characterIdx);
+            NetMessage msg = new NetMessage();
+            msg.Request = new NetMessageRequest();
+            msg.Request.gameEnter = new UserGameEnterRequest();
+            msg.Request.gameEnter.characterIdx = characterIdx;
+            NetClient.Instance.SendMessage(msg);
         }
 
-        private void OnGameServerDisconnect(int result, string reason)
-        {
-            // 进行断连通知
-            DisconnectNotify(result, reason);
-        }
 
-        private bool DisconnectNotify(int result, string reason)
+        private void OnGameEnter(object sender, UserGameEnterResponse response)
         {
-            // 判断是否有消息在排队
-            // 如果有，判断是否有登录请求的消息
-            // 如果有，判断是否有登录监听
-            // 如果有，则发送一个失败的消息
-            if (pendingMessage!=null)
+            Debug.LogFormat("OnGameEnter:{0} [{1}]", response.Result, response.Errormsg);
+
+            if (response.Result == Result.Success)
             {
-                if (pendingMessage.Request.userLogin != null)
-                {
-                    if (OnLogin != null)
-                    {
-                        OnLogin(Result.Failed, string.Format("服务器断开！\n RESULT:{0} ERROR:{1}",result,reason));
-                    }
-                }
-                return true;
+                // todo
             }
-            return false;
         }
 
     }

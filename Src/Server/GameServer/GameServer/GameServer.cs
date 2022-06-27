@@ -11,6 +11,7 @@ using System.Threading;
 
 using Network;
 using GameServer.Services;
+using GameServer.Managers;
 
 namespace GameServer
 {
@@ -25,8 +26,11 @@ namespace GameServer
             network = new NetService();
             network.Init(port);
 
-            HelloworldService.Instance.Init();
-
+            // 各种服务初始化
+            DBService.Instance.Init();
+            DataManager.Instance.Load();
+            UserService.Instance.Init();
+            MapService.Instance.Init();
 
             //DBService.Instance.Init();
             // db是否成功可以在这里打印一个数据字段看看
